@@ -1,9 +1,9 @@
 # OskarWspoldzielnia
-**[Programista platformy .NET](https://www.wszib.edu.pl/podyplomowe-kursy/podyplomowe/podyplomowe-programista-net/)**
+Projekt na zaliczenie studiów podyplomowych **[Programista platformy .NET](https://www.wszib.edu.pl/podyplomowe-kursy/podyplomowe/podyplomowe-programista-net/)**
 
 ## Temat: 
 > Stwórz program dla Wspólnoty, 
-wykorzystując API 
+##### wykorzystując API 
 > który zawiera 
 > 1. Bazę mieszkań i właścicieli w danej Wspólnocie dostępną dla każdego po zalogowaniu
 > 2. Konto właściciela:
