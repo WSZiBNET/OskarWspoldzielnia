@@ -11,7 +11,8 @@
     [Active]  BIT             CONSTRAINT [DF_tblInvoices_Active] DEFAULT ((1)) NOT NULL,
     CONSTRAINT [PK_tblInvoices] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_tblInvoices_tblFlats] FOREIGN KEY ([FlatId]) REFERENCES [dbo].[tblFlats] ([Id]),
-    CONSTRAINT [FK_tblInvoices_tblOwners] FOREIGN KEY ([OwnerId]) REFERENCES [dbo].[tblOwners] ([Id])
+    CONSTRAINT [FK_tblInvoices_tblOwners] FOREIGN KEY ([OwnerId]) REFERENCES [dbo].[tblOwners] ([Id]),
+    CONSTRAINT [UX_tblInvoices_Number] UNIQUE NONCLUSTERED ([Number] ASC)
 );
 
 

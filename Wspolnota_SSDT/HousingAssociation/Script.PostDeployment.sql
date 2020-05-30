@@ -12,3 +12,4 @@ Post-Deployment Script Template
 
 :r .\Scripts\local\tblUsers.sql
 :r .\Scripts\local\tblOwners.sql
+:r .\Scripts\local\tblFlats.sql

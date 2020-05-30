@@ -1,7 +1,7 @@
 ﻿
 
 --- <summary>
---- Log date and system user
+--- View Owners with Login and Password
 --- </summary>
 --- <param name="Id">ID filmu</param>
 --- <event author="Oskar Wielanowski" date="30.05.2020" project="Zaliczenie">View Created/event>

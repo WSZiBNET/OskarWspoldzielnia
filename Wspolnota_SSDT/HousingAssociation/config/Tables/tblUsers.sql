@@ -8,7 +8,8 @@
     [ModUser]  NVARCHAR (128) NULL,
     [IsAdmin]  BIT            CONSTRAINT [DF_tblUsers_IsAdmin] DEFAULT ((0)) NOT NULL,
     [Active]   BIT            CONSTRAINT [DF_tblUsers_Active] DEFAULT ((1)) NOT NULL,
-    CONSTRAINT [PK_tblUsers] PRIMARY KEY CLUSTERED ([Id] ASC)
+    CONSTRAINT [PK_tblUsers] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [UX_tblUsers_Login] UNIQUE NONCLUSTERED ([Login] ASC)
 );
 
 

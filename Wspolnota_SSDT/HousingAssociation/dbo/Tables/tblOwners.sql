@@ -10,7 +10,8 @@
     [ModUser]   NVARCHAR (128) NULL,
     [Active]    BIT            CONSTRAINT [DF_tblOwners_Active] DEFAULT ((1)) NOT NULL,
     CONSTRAINT [PK_tblOwners] PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_tblOwners_tblUsers] FOREIGN KEY ([UserId]) REFERENCES [config].[tblUsers] ([Id])
+    CONSTRAINT [FK_tblOwners_tblUsers] FOREIGN KEY ([UserId]) REFERENCES [config].[tblUsers] ([Id]),
+    CONSTRAINT [UX_tblOwners_Name] UNIQUE NONCLUSTERED ([FirstName] ASC, [LastName])
 );
 
 

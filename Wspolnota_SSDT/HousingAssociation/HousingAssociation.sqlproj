@@ -75,11 +75,13 @@
     <Build Include="dbo\Views\vwOwners.sql" />
     <Build Include="Security\config.sql" />
     <None Include="Scripts\local\tblOwners.sql" />
+    <None Include="Scripts\local\tblFlats.sql" />
+    <None Include="Scripts\local\tblInvoices.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\local\tblUsers.sql" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="Script.PostDeployment1.sql" />
+    <PostDeploy Include="Script.PostDeployment.sql" />
   </ItemGroup>
 </Project>

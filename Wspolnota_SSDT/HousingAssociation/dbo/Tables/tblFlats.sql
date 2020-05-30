@@ -12,7 +12,8 @@
     [ModUser]      NVARCHAR (128)   NULL,
     [Active]       BIT              CONSTRAINT [DF_tblFlats_Active] DEFAULT ((1)) NOT NULL,
     CONSTRAINT [PK_tblFlats] PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_tblFlats_tblOwners] FOREIGN KEY ([OwnerId]) REFERENCES [dbo].[tblOwners] ([Id])
+    CONSTRAINT [FK_tblFlats_tblOwners] FOREIGN KEY ([OwnerId]) REFERENCES [dbo].[tblOwners] ([Id]),
+    CONSTRAINT [UX_tblFlats_Number] UNIQUE NONCLUSTERED ([Number] ASC)
 );
 
 
