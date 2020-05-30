@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>APIWspolnota</name>
+    </assembly>
+    <members>
+        <member name="M:APIWspolnota.Controllers.TblInvoicesController.GetTblInvoices">
+            <summary>
+            Pobieranie Informacji o finansach
+            </summary>
+            <returns>Lista faktur</returns>
+        </member>
+        <member name="M:APIWspolnota.Controllers.TblInvoicesController.GetTblInvoices(System.Int32)">
+            <summary>
+            Pobieranie Informacji o finansach
+            </summary>
+            <param name="id">id faktury</param>
+            <returns>Faktura o wskazanym id</returns>
+        </member>
+        <member name="M:APIWspolnota.Controllers.TblOwnersController.GetTblOwners">
+            <summary>
+            Pobieranie Informacji o Wlascicielach
+            </summary>
+            <returns>FLista Wlascicieli</returns>
+        </member>
+        <member name="M:APIWspolnota.Controllers.TblOwnersController.GetTblOwners(System.Int32)">
+            <summary>
+            Pobieranie Informacji o Wlascicielu
+            </summary>
+            <param name="id">id wlasciciela</param>
+            <returns>Wlasciciel o wskazanym id</returns>
+        </member>
+        <member name="M:APIWspolnota.Controllers.TblUsersController.GetTblUsers">
+            <summary>
+            Pobieranie Informacji o Uzytkownikach
+            </summary>
+            <returns>Lista Wlascicieli</returns>
+        </member>
+        <member name="M:APIWspolnota.Controllers.TblUsersController.GetTblUsers(System.Int32)">
+            <summary>
+            Pobieranie Informacji o Uzytkowniku
+            </summary>
+            <param name="id">id uzytkownika</param>
+            <returns>Wlasciciel o wskazanym id</returns>
+        </member>
+        <member name="M:APIWspolnota.Controllers.VwFlatsController.GetVwFlats">
+            <summary>
+            Pobieranie Informacji o Mieszkaniach
+            </summary>
+            <returns>Lista Mieszkan</returns>
+        </member>
+    </members>
+</doc>

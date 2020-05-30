@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using APIWspolnota.Models;
+using Microsoft.Extensions.Logging;
 
 namespace APIWspolnota.Controllers
 {
@@ -14,12 +15,18 @@ namespace APIWspolnota.Controllers
     public class TblInvoicesController : ControllerBase
     {
         private readonly HousingAssociationContext _context;
+        private readonly ILogger _logger;
 
-        public TblInvoicesController(HousingAssociationContext context)
+        public TblInvoicesController(HousingAssociationContext context, ILogger<TblInvoicesController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
+        /// <summary>
+        /// Pobieranie Informacji o finansach
+        /// </summary>
+        /// <returns>Lista faktur</returns>
         // GET: api/TblInvoices
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TblInvoices>>> GetTblInvoices()
@@ -27,14 +34,22 @@ namespace APIWspolnota.Controllers
             return await _context.TblInvoices.ToListAsync();
         }
 
+        /// <summary>
+        /// Pobieranie Informacji o finansach
+        /// </summary>
+        /// <param name="id">id faktury</param>
+        /// <returns>Faktura o wskazanym id</returns>
         // GET: api/TblInvoices/5
         [HttpGet("{id}")]
         public async Task<ActionResult<TblInvoices>> GetTblInvoices(int id)
         {
+            _logger.LogInformation($"Ktoś wywołał zapytanie o fakturę o id: {id}");
+
             var tblInvoices = await _context.TblInvoices.FindAsync(id);
 
             if (tblInvoices == null)
             {
+                _logger.LogError($"Faktura o id {id} nie istnieje, a ktoś jej szuka.");
                 return NotFound();
             }
 

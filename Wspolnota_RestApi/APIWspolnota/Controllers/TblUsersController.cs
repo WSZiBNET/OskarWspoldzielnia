@@ -20,6 +20,10 @@ namespace APIWspolnota.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Pobieranie Informacji o Uzytkownikach
+        /// </summary>
+        /// <returns>Lista Wlascicieli</returns>
         // GET: api/TblUsers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TblUsers>>> GetTblUsers()
@@ -27,6 +31,11 @@ namespace APIWspolnota.Controllers
             return await _context.TblUsers.ToListAsync();
         }
 
+        /// <summary>
+        /// Pobieranie Informacji o Uzytkowniku
+        /// </summary>
+        /// <param name="id">id uzytkownika</param>
+        /// <returns>Wlasciciel o wskazanym id</returns>
         // GET: api/TblUsers/5
         [HttpGet("{id}")]
         public async Task<ActionResult<TblUsers>> GetTblUsers(int id)

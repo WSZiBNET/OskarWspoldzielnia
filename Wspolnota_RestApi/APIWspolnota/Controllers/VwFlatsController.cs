@@ -20,6 +20,10 @@ namespace APIWspolnota.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Pobieranie Informacji o Mieszkaniach
+        /// </summary>
+        /// <returns>Lista Mieszkan</returns>
         // GET: api/VwFlats
         [HttpGet]
         public async Task<ActionResult<IEnumerable<VwFlats>>> GetVwFlats()
@@ -27,79 +31,86 @@ namespace APIWspolnota.Controllers
             return await _context.VwFlats.ToListAsync();
         }
 
-        // GET: api/VwFlats/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<VwFlats>> GetVwFlats(int id)
-        {
-            var tblFlats = await _context.VwFlats.FindAsync(id);
+        /* przez geometrie wszystko sie psuje :( */
 
-            if (tblFlats == null)
-            {
-                return NotFound();
-            }
+        ///// <summary>
+        ///// Pobieranie Informacji o Mieszkaniu
+        ///// </summary>
+        ///// <param name="id">id mieszkania</param>
+        ///// <returns>Mieszkanie o wskazanym id</returns>
+        //// GET: api/VwFlats/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<VwFlats>> GetVwFlats(int id)
+        //{
+        //    var tblFlats = await _context.VwFlats.FindAsync(id);
 
-            return tblFlats;
-        }
+        //    if (tblFlats == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-        // PUT: api/VwFlats/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutVwFlats(int id, VwFlats tblFlats)
-        {
-            if (id != tblFlats.Id)
-            {
-                return BadRequest();
-            }
+        //    return tblFlats;
+        //}
 
-            _context.Entry(tblFlats).State = EntityState.Modified;
+        //// PUT: api/VwFlats/5
+        //// To protect from overposting attacks, enable the specific properties you want to bind to, for
+        //// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutVwFlats(int id, VwFlats tblFlats)
+        //{
+        //    if (id != tblFlats.Id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!VwFlatsExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    _context.Entry(tblFlats).State = EntityState.Modified;
 
-            return NoContent();
-        }
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!VwFlatsExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-        // POST: api/VwFlats
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<VwFlats>> PostVwFlats(VwFlats tblFlats)
-        {
-            _context.VwFlats.Add(tblFlats);
-            await _context.SaveChangesAsync();
+        //    return NoContent();
+        //}
 
-            return CreatedAtAction("GetVwFlats", new { id = tblFlats.Id }, tblFlats);
-        }
+        //// POST: api/VwFlats
+        //// To protect from overposting attacks, enable the specific properties you want to bind to, for
+        //// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        //[HttpPost]
+        //public async Task<ActionResult<VwFlats>> PostVwFlats(VwFlats tblFlats)
+        //{
+        //    _context.VwFlats.Add(tblFlats);
+        //    await _context.SaveChangesAsync();
 
-        // DELETE: api/VwFlats/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<VwFlats>> DeleteVwFlats(int id)
-        {
-            var tblFlats = await _context.VwFlats.FindAsync(id);
-            if (tblFlats == null)
-            {
-                return NotFound();
-            }
+        //    return CreatedAtAction("GetVwFlats", new { id = tblFlats.Id }, tblFlats);
+        //}
 
-            _context.VwFlats.Remove(tblFlats);
-            await _context.SaveChangesAsync();
+        //// DELETE: api/VwFlats/5
+        //[HttpDelete("{id}")]
+        //public async Task<ActionResult<VwFlats>> DeleteVwFlats(int id)
+        //{
+        //    var tblFlats = await _context.VwFlats.FindAsync(id);
+        //    if (tblFlats == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return tblFlats;
-        }
+        //    _context.VwFlats.Remove(tblFlats);
+        //    await _context.SaveChangesAsync();
+
+        //    return tblFlats;
+        //}
 
         private bool VwFlatsExists(int id)
         {

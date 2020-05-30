@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 
 namespace APIWspolnota
 {
@@ -23,10 +25,27 @@ namespace APIWspolnota
 
         public IConfiguration Configuration { get; }
 
+        // Add AddDbContext
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<HousingAssociationContext>();
+
+            services.AddControllers().AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "WspolnotaAPI",
+                    Version = "v1",
+                    Description = "Moje drugie API z dokumentacja",
+                    Contact = new OpenApiContact() { Name = "Oskar Wielanowski", Email = "oskar@groupka.pl", Url = new Uri("https://www.wszib.edu.pl") }
+                });
+                c.IncludeXmlComments(@"C:\Users\OWielanowski\source\repos\WSZiBNET\OskarWspoldzielnia\Wspolnota_RestApi\APIWspolnota\APIWspolnota.xml");
+            });
+
             services.AddControllers();
         }
 
@@ -37,6 +56,13 @@ namespace APIWspolnota
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Wspolnota API v1");
+            });
+
 
             app.UseHttpsRedirection();
 

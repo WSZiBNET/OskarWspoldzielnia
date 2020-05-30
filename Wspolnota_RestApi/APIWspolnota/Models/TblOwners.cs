@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace APIWspolnota.Models
 {
-    public partial class TblOwners
+    public class TblOwners
     {
         public TblOwners()
         {
