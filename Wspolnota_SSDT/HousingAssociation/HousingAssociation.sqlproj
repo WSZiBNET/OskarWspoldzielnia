@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\local\tblUsers.sql" />
+    <None Include="LocalHousingAssociation.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />
