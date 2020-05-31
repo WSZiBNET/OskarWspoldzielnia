@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Wspolnota_MVC.Services
 {    
+
     public class UserService : IAPIService
     {
         public HttpClient Client { get; }

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using APIWspolnota.Models;
 using Microsoft.AspNetCore.Http;
@@ -13,6 +16,8 @@ namespace Wspolnota_MVC.Controllers
     public class UsersControler : Controller
     {
         private IAPIService _services;
+
+        public object UTF8 { get; private set; }
 
         public UsersControler(IAPIService service)
         {
@@ -65,41 +70,37 @@ namespace Wspolnota_MVC.Controllers
             return View();
         }
 
+        class OsobaJson
+        {
+            public string Login { get; set; }
+            public string Password { get; set; }
+
+            public OsobaJson(string login, string password)
+            {
+                Login = login;
+                Password = password;
+            }
+        }
         // POST: UsersControler/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        // public async Task<ActionResult> Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Create(string Login, string Password, IFormCollection collection)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            OsobaJson newUser = new OsobaJson(Login, Password);
+
+            var content = new StringContent(JsonConvert.SerializeObject(newUser));
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var request = _services.Client.PostAsync("api/TblUsers", content);
+
+            var response = request.Result.Content.ReadAsStringAsync().Result;
+
+            return Ok();
         }
 
-        // GET: UsersControler/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: UsersControler/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+
 
         // GET: UsersControler/Delete/5
         public async Task<ActionResult> Delete(int? id)
