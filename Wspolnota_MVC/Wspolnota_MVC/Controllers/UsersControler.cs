@@ -34,9 +34,29 @@ namespace Wspolnota_MVC.Controllers
         }
 
         // GET: UsersControler/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            //List<TblUsers> users = new List<TblUsers>();
+            //SerializeObject
+            TblUsers users = new TblUsers();
+
+            var response = await _services.Client.GetAsync($"api/TblUsers/{id}");
+            if (response.Content == null )
+            {
+                return NotFound();
+            }
+
+            if (response.IsSuccessStatusCode)
+            {
+                var loadedUsers = response.Content.ReadAsStringAsync().Result;
+                users = JsonConvert.DeserializeObject<TblUsers>(loadedUsers);
+            }
+            return View(users);
         }
 
         // GET: UsersControler/Create
@@ -82,24 +102,50 @@ namespace Wspolnota_MVC.Controllers
         }
 
         // GET: UsersControler/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int? id)
         {
-            return View();
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            TblUsers users = new TblUsers();
+
+            var response = await _services.Client.GetAsync($"api/TblUsers/{id}");
+            if (response.Content == null)
+            {
+                return NotFound();
+            }
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return NotFound();
+            }
+
+            if (response.IsSuccessStatusCode)
+            {
+                var loadedUsers = response.Content.ReadAsStringAsync().Result;
+                users = JsonConvert.DeserializeObject<TblUsers>(loadedUsers);
+            }
+
+            return View(users);
         }
 
         // POST: UsersControler/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id, IFormCollection collection)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                await _services.Client.DeleteAsync($"api/TblUsers/{id}");
             }
             catch
             {
-                return View();
+                throw new System.InvalidOperationException("Error");
             }
+            return Ok();
         }
     }
 }
