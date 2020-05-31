@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace APIWspolnota.Models
@@ -21,7 +20,6 @@ namespace APIWspolnota.Models
         public bool IsAdmin { get; set; }
         public bool? Active { get; set; }
 
-        [JsonIgnore]
         public virtual ICollection<TblOwners> TblOwners { get; set; }
     }
 }
