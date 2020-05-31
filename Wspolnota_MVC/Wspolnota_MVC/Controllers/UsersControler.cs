@@ -96,7 +96,7 @@ namespace Wspolnota_MVC.Controllers
 
             var response = request.Result.Content.ReadAsStringAsync().Result;
 
-            return Ok();
+            return Redirect("./");
         }
 
 
@@ -146,7 +146,7 @@ namespace Wspolnota_MVC.Controllers
             {
                 throw new System.InvalidOperationException("Error");
             }
-            return Ok();
+            return Redirect("../");
         }
     }
 }
