@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace APIWspolnota.Models
@@ -15,8 +16,9 @@ namespace APIWspolnota.Models
         public DateTime? ModDate { get; set; }
         public string ModUser { get; set; }
         public bool? Active { get; set; }
-
+        [JsonIgnore]
         public virtual TblFlats Flat { get; set; }
+        [JsonIgnore]
         public virtual TblOwners Owner { get; set; }
     }
 }

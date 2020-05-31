@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NetTopologySuite.Geometries;
+using Newtonsoft.Json;
 
 namespace APIWspolnota.Models
 {
@@ -13,6 +14,7 @@ namespace APIWspolnota.Models
 
         public int Id { get; set; }
         public string Number { get; set; }
+        [JsonIgnore]
         public Geometry Geometry { get; set; }
         public double SurfaceArea { get; set; }
         public string GeometryDesc { get; set; }
@@ -24,7 +26,9 @@ namespace APIWspolnota.Models
         public string ModUser { get; set; }
         public bool? Active { get; set; }
 
+        [JsonIgnore]
         public virtual TblOwners Owner { get; set; }
+        [JsonIgnore]
         public virtual ICollection<TblInvoices> TblInvoices { get; set; }
     }
 }
