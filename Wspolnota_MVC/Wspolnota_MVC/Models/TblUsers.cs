@@ -18,7 +18,7 @@ namespace APIWspolnota.Models
         public DateTime? ModDate { get; set; }
         public string ModUser { get; set; }
         public bool IsAdmin { get; set; }
-        public bool? Active { get; set; }
+        public bool Active { get; set; }
 
         public virtual ICollection<TblOwners> TblOwners { get; set; }
     }

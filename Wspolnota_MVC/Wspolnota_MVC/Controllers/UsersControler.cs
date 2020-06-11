@@ -99,8 +99,54 @@ namespace Wspolnota_MVC.Controllers
             return Redirect("./");
         }
 
+        // GET: UsersControler/Edit/5
+        public async  Task<ActionResult> Edit(int id)
+        {
+            TblUsers users = new TblUsers();
 
+            var response = await _services.Client.GetAsync($"api/TblUsers/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                var pobranyUser = response.Content.ReadAsStringAsync().Result;
+                users = JsonConvert.DeserializeObject<TblUsers>(pobranyUser);
+            }
+            return View(users);
+            
+        }
 
+        // POST: Filmy/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(int id, DateTime addDate, string addUser, IFormCollection collection)
+        {
+            try
+            {
+                TblUsers users = new TblUsers();
+                users.Id = id;
+                users.Login =  collection["login"].ToString();
+                users.Password = collection["password"].ToString();
+
+                users.AddDate = addDate; /* Convert.ToDateTime(collection["AddDate"].ToString()); */
+                users.AddUser = addUser; /* collection["addUser"].ToString(); */
+
+                users.ModDate = Convert.ToDateTime(collection["modDate"].ToString());
+                users.ModUser = collection["ModUser"].ToString();
+
+                users.IsAdmin = false; // Convert.ToBoolean(collection["isAdmin"].ToString());
+                users.Active = true; // Convert.ToBoolean(collection["active"].ToString());
+
+                string jsonEditUser = JsonConvert.SerializeObject(users, Formatting.Indented);
+                var content = new StringContent(jsonEditUser, Encoding.UTF8, "application/json");
+
+                var request = await _services.Client.PutAsync($"/api/Films/{id}", content);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
         // GET: UsersControler/Delete/5
         public async Task<ActionResult> Delete(int? id)
